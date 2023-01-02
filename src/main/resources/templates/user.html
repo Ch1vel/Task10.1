@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User page</title>
+</head>
+<body>
+<div th:text="'Your id ' + ${user.getId()}">Id</div>
+    <div th:text="'Your name ' + ${user.getFirstName()}">Name</div>
+    <div th:text="'Your lastname ' + ${user.getLastName()}">Lastname</div>
+    <div th:text="'Your age ' + ${user.getAge()}">Age</div>
+    <div th:text="'Your email ' + ${user.getEmail()}">Email</div>
+    <div th:text="'Your role(s) ' + ${user.getRoles()}">Roles</div>
+<br>
+<br>
+<a href="/logout">LOGOUT</a>
+</body>
+</html>

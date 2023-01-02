@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+</head>
+<body>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Имя</th>
+    <th>Фамилия</th>
+    <th>Возраст</th>
+    <th>E-mail</th>
+    <th>Role</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.getId()}">Id</td>
+      <td th:text="${user.getFirstName()}">Имя</td>
+      <td th:text="${user.getLastName()}">Фамилия</td>
+      <td th:text="${user.getAge()}">Возраст</td>
+      <td th:text="${user.getEmail()}">E-mail</td>
+      <td th:text="${user.getRoles()}">Role</td>
+      <td>
+        <a th:href="@{/admin/{id}/edit(id=${user.getId()})}">Edit</a>
+      </td>
+      <td>
+        <form th:method="DELETE" th:action="@{/admin/{id}/delete(id=${user.getId()})}">
+          <input type="submit" value="Delete"/></form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<a href="/admin/add">Add new user</a>
+<br>
+<br>
+<a href="/logout">LOGOUT</a>
+</body>
+</html>
