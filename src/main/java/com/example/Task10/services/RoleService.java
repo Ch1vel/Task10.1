@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RoleService {
+public class RoleService implements RoleServiceInterface{
 
     private final RoleRepository roleRepository;
 

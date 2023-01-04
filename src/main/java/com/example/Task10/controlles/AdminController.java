@@ -63,7 +63,7 @@ public class AdminController {
     public String edit(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         userValidation.validate(user,bindingResult);
         if(bindingResult.hasErrors()) return "edit";
-        userService.add(user);
+        userService.update(user);
         return "redirect:/admin";
     }
 }

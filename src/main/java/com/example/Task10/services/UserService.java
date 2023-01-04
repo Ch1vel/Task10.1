@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
-public class UserService implements UserDetailsService {
+public class UserService implements UserServiceInterface {
 
     private UserRepository userRepository;
 
@@ -28,14 +28,6 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findUserByEmail(username);
-        if(user.isEmpty()) {
-            throw new UsernameNotFoundException("Такой пользователь не существует");
-        }
-        return userRepository.findUserByEmail(username).get();
-    }
     @Transactional
     public boolean add(User user) {
         Optional<User> userFromDB = userRepository.findUserByEmail(user.getEmail());
@@ -55,5 +47,13 @@ public class UserService implements UserDetailsService {
 
     public User show(int id) {
         return userRepository.findById(id).get();
+    }
+
+    @Override
+    public void update(User user) {
+        Optional<User> userFromDB = userRepository.findUserByEmail(user.getEmail());
+        if(userFromDB.isPresent()) return;
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 }
